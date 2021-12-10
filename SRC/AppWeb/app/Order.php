@@ -25,7 +25,7 @@ class Order extends Model
 
     public function delivery_guy()
     {
-        return $this->belongsTo(delivery_guy::class);
+        return $this->belongsTo(Delivery_guy::class);
     }
 
 
