@@ -10,7 +10,6 @@ use App\Delivery_guy;
 use App\Mail\CustomerRegisterMail;
 use DB;
 use File;
-use App\Jobs\ProductJob;
 
 class Delivery_guyController extends Controller
 {
