@@ -15,7 +15,6 @@ use Mail;
 use App\Mail\CustomerRegisterMail;
 use DB;
 use File;
-use App\Jobs\ProductJob;
 
 class OrderController extends Controller
 {
