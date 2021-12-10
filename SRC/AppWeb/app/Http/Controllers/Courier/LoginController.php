@@ -76,7 +76,6 @@ class LoginController extends Controller
 		]);
 
 		Mail::to($request->email)->send(new CustomerRegisterMail($customer, $request->password));
-		$out->writeln("Hola ya voy a salir de latinoamerica");
 		return redirect()->intended(route('front.index'));
 	}
 }
