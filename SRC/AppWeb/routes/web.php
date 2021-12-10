@@ -68,6 +68,7 @@ Route::group(['prefix' => 'delivery_guy', 'namespace' => 'Delivery_guy'], functi
 Route::group(['prefix' => 'administrator', 'middleware' => 'auth'], function() {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('category', 'CategoryController')->except(['create', 'show']);
+    Route::get('category/listing', 'CategoryController@listing')->name('category.listing');
     Route::resource('product', 'ProductController')->except(['show']);
     Route::resource('customer', 'CustomerController')->except(['show']);
     Route::resource('order', 'OrderController')->except(['show']);

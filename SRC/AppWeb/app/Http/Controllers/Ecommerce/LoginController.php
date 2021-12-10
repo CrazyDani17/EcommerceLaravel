@@ -60,8 +60,6 @@ class LoginController extends Controller
 
 	public function register(Request $request)
 	{
-		$out = new \Symfony\Component\Console\Output\ConsoleOutput();
-		$out->writeln("Hola estoy en register");
 	    $this->validate($request, [
 	        'customer_name' => 'required|string|max:100',
 	        'phone_number' => 'required',
@@ -129,9 +127,6 @@ class LoginController extends Controller
 			'city_id' => 'required|exists:cities,id',
 			'district_id' => 'required|exists:districts,id'
 		]);
-
-		$out = new \Symfony\Component\Console\Output\ConsoleOutput();
-		$out->writeln("La bebecita bebe lean");
 
 	    $customer = Customer::find($user_id);
 	    $customer->update([
