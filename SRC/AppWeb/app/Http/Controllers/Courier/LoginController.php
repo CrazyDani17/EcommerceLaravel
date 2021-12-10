@@ -25,40 +25,25 @@ class LoginController extends Controller
 
     public function login(Request $request)
 	{
-	    //VALIDASI DATA YANG DITERIMA
 	    $out = new \Symfony\Component\Console\Output\ConsoleOutput();
 		$out->writeln("Hola mrd");
 		$this->validate($request, [
 	        'email' => 'required|email|exists:couriers,email',
 	        'password' => 'required|string'
 	    ]);
-
-	    //CUKUP MENGAMBIL EMAIL DAN PASSWORD SAJA DARI REQUEST
-	    //KARENA JUGA DISERTAKAN TOKEN
-		//$password=bcrypt($request['password']);
 		
 	    $auth = $request->only('email', 'password');
-	    $auth['status'] = 1; //TAMBAHKAN JUGA STATUS YANG BISA LOGIN HARUS 1
-	  
-	    //CHECK UNTUK PROSES OTENTIKASI
-	    //DARI GUARD CUSTOMER, KITA ATTEMPT PROSESNYA DARI DATA $AUTH
-		//['username' => $request['username'], 'password' => $password]
+	    $auth['status'] = 1;
 	    if (auth()->guard('courier')->attempt($auth)
 		) {
-	        //JIKA BERHASIL MAKA AKAN DIREDIRECT KE DASHBOARD
-	        //return redirect()->intended(route('customer.dashboard'));
-			$out = new \Symfony\Component\Console\Output\ConsoleOutput();
-			$out->writeln("Prra");
 			return redirect()->intended(route('courier.home'));
 	    }
-	    //JIKA GAGAL MAKA REDIRECT KEMBALI BERSERTA NOTIFIKASI
 	    return redirect()->back()->with(['error' => 'Wrong Email/Password']);
 	}
 
 	public function registerForm()
     {
 		$provinces = Province::orderBy('created_at', 'DESC')->get();
-    	//if (auth()->guard('customer')->check()) return redirect(route('customer.dashboard'));
 		if (auth()->guard('customer')->check()) return redirect(route('ecommerce.index'));
 		$n_carts = $this->getNCarts();
         return view('ecommerce.register', compact('n_carts','provinces'));
@@ -68,7 +53,6 @@ class LoginController extends Controller
 	{
 		$out = new \Symfony\Component\Console\Output\ConsoleOutput();
 		$out->writeln("Hola estoy en register");
-	    //VALIDASI DATANYA
 	    $this->validate($request, [
 	        'customer_name' => 'required|string|max:100',
 	        'phone_number' => 'required',
