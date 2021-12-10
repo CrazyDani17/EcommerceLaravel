@@ -145,6 +145,7 @@ class PaymentController extends Controller
 	            'customer_phone' => $customer->phone_number,
 	            'customer_address' => $customer->address,
 	            'district_id' => $customer->district_id,
+                'courier_id' => 1,
 	            'subtotal' => $subtotal
 	        ]);
 
